@@ -8,7 +8,7 @@ RUN mkdir /mapcrafter
 
 WORKDIR /
 
-RUN git clone -b beta https://github.com/lucymhdavies/mapcrafter.git
+RUN git clone https://github.com/mapcrafter/mapcrafter.git
 
 WORKDIR   /mapcrafter
 
