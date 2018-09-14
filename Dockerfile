@@ -4,10 +4,6 @@ RUN yum install -y git \
         boost-devel libjpeg-devel libpng-devel gcc-c++ make cmake \
         wget ImageMagick
 
-VOLUME ["/mapcrafter"]
-
-RUN mkdir /mapcrafter
-
 WORKDIR /
 
 # Clone the 1.13 branch for now
