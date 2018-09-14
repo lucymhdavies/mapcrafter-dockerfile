@@ -15,7 +15,8 @@ WORKDIR   /mapcrafter
 RUN cmake .
 
 # Thanks, https://mcversions.net/ :)
-RUN wget https://launcher.mojang.com/mc/game/1.12/client/909823f9c467f9934687f136bc95a667a0d19d7f/client.jar
+#RUN wget https://launcher.mojang.com/mc/game/1.12/client/909823f9c467f9934687f136bc95a667a0d19d7f/client.jar
+RUN wget https://launcher.mojang.com/mc/game/18w19b/client/6e5306869f9644e0a91f23345b4f445742daf5cc/client.jar
 
 RUN ./src/tools/mapcrafter_textures.py client.jar src/data/textures/
 
