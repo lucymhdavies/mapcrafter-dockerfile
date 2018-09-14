@@ -4,21 +4,24 @@ RUN yum install -y git \
         boost-devel libjpeg-devel libpng-devel gcc-c++ make cmake \
         wget ImageMagick
 
+VOLUME ["/mapcrafter"]
+
 RUN mkdir /mapcrafter
 
 WORKDIR /
 
-RUN git clone https://github.com/mapcrafter/mapcrafter.git
+# Clone the 1.13 branch for now
+RUN git clone -b world113 https://github.com/mapcrafter/mapcrafter.git
 
 WORKDIR   /mapcrafter
 
-RUN cmake .
-
+# Textures
 # Thanks, https://mcversions.net/ :)
-RUN wget https://launcher.mojang.com/mc/game/1.12/client/909823f9c467f9934687f136bc95a667a0d19d7f/client.jar
+RUN wget https://launcher.mojang.com/v1/objects/8de235e5ec3a7fce168056ea395d21cbdec18d7c/client.jar && \
+    ./src/tools/mapcrafter_textures.py client.jar src/data/textures/ && \
+    rm client.jar
 
-RUN ./src/tools/mapcrafter_textures.py client.jar src/data/textures/
-
+RUN cmake .
 RUN make install
 
 RUN echo "/usr/local/lib"   >> /etc/ld.so.conf.d/usrlocal.conf && \
@@ -26,8 +29,7 @@ RUN echo "/usr/local/lib"   >> /etc/ld.so.conf.d/usrlocal.conf && \
 
 RUN ldconfig -v
 
-RUN mkdir /tmp/workdir
-WORKDIR   /tmp/workdir
+WORKDIR   /
 
 ADD entrypoint.sh /entrypoint.sh
 

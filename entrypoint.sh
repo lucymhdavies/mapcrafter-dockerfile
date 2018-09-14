@@ -1,3 +1,6 @@
 #!/bin/bash
+if [ ! -f /config/render.conf ]; then
+    cp /render.conf /config/render.conf
+fi
 
-/usr/local/bin/mapcrafter $@
+mapcrafter -c /config/render.conf
